@@ -1,0 +1,120 @@
+* { box-sizing: border-box; }
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.pres--container {
+	width: 80vw;
+	min-height: 100vh;
+	margin: 16px auto;
+}
+
+.pres--header {
+	background-color: rgb(5, 71, 120);
+	color: rgb(230, 234, 237);
+	font-size: 20px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.pres--header__div-1 {
+	float: left;
+	margin-left: 16px;
+}
+
+.pres--header__div-2 {
+	float: right;
+	margin-right: 16px;
+}
+
+.button {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.button4 {
+  	background-color: white;
+  	color: black;
+  	border: 2px solid #e7e7e7;
+}
+
+.button4:hover {background-color: #e7e7e7;}
+
+.button5 {
+  	background-color: white;
+  	color: black;
+  	border: 2px solid #555555;
+}
+
+.button5:hover {
+  	background-color: #555555;
+  	color: white;
+}
+
+.pres--content {
+	padding: 10px 24px;
+}
+
+.doctor--info {
+	min-height: 20vh;
+	border: 2px solid rgb(222, 225, 227);
+	padding: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.doctor--info_1 { float: left; }
+.doctor--info_2 { float: right; margin-right: 25px; }
+.doc-name { font-weight: bold; font-size: 18px; }
+.address { font-weight: bold; display: block; padding: 10px 0; }
+
+.content--head {
+	border: 2px solid rgb(222, 225, 227);
+	padding: 8px 7px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.name, .age, .gender { font-weight: bold; font-size: 18px; }
+.age, .gender { margin-left: 15px; }
+
+.pres--content_1 {
+	width: 30%;
+	min-height: 85vh;
+	float: left;
+}
+
+.pres--content_1--symptomps,
+.pres--content_1--test,
+.pres--content_1--advice {
+	border: 2px solid rgb(222, 225, 227);
+	min-height: 30vh;
+	font-size: 18px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.pres--content_2 {
+	border: 2px solid rgb(222, 225, 227);
+	width: 70%;
+	min-height: 90vh;
+	float: left;
+	padding: 20px 25px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.head {
+	background-color: rgb(5, 71, 120);
+	padding: 5px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	color: rgb(230, 234, 237);
+}
+
+/*52, 146, 235*/
