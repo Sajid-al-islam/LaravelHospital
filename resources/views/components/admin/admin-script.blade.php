@@ -31,3 +31,5 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="{{ asset('/') }}dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('/') }}dist/js/pages/dashboard.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>

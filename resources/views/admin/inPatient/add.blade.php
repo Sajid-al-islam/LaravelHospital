@@ -93,11 +93,11 @@
                         <label>Department</label>
                         <select class="form-control dept" name="department_id" id="department">
                             <option>Select department</option>
-                        @foreach($departments as $department)
-                            <option value="{{ $department->id }}">
-                                {{ $department->name }}
-                            </option>
-                        @endforeach()
+                            @foreach($departments as $department)
+                                <option value="{{ $department->id }}">
+                                    {{ $department->name }}
+                                </option>
+                            @endforeach()
                         </select>
                     </div>
                     <div class="form-group col-md-4">

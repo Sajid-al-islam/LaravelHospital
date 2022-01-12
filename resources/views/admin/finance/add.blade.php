@@ -100,6 +100,20 @@
                         <h2 class="col-md-8 col-xs-12 text-left text-success">Add Bill</h2>
                     </div>
 
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select Patient
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                @foreach ($patient_data as $item)
+                                    <form action="{{ route('finance.get_data', ["patient_id" => $item->admission_id]) }}" method="get">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">{{ $item->name }}</button>
+                                    </form>
+                                @endforeach
+                        </div>
+                    </div>
+
                     <div class="panel-body">
                         <form action="{{ route('finance.add') }}" class="billig-form" method="post" accept-charset="utf-8">
                             @csrf
@@ -107,53 +121,39 @@
                                 <div class="col-sm-9">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-6">
-                                            
-
-                                            <div class="dropdown">
-                                                
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Dropdown button
-                                                </button>
-                                                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </div>
 
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" id="admission_id" value="" name="admission_id" placeholder="AID" required="" />
+                                                        <input type="text" class="form-control" id="admission_id" value="{{ $item->admission_id }}" name="admission_id" placeholder="AID" />
                                                         <span class="input-group-btn"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" id="patient_id" value="" placeholder="Patient ID" disabled="" />
+                                                        <input type="text" class="form-control" id="patient_id" value="{{ $item->admission_id }}" placeholder="Patient ID" disabled="" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <input name="bill_date" type="text" class="form-control datepicker hasDatepicker" id="bill_date" placeholder="Bill Date" required="" />
+                                                <input name="bill_date" type="text" class="form-control datepicker hasDatepicker" value="{{ $item->created_at }}" id="bill_date" placeholder="Bill Date" />
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="patient_name" placeholder="Patient  Name" disabled="" />
+                                                <input type="text" class="form-control" id="patient_name" placeholder="Patient  Name" disabled="" value="{{ $item->name }}" />
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="date_of_birth" placeholder="Date of Birth" disabled="" />
+                                                <input type="text" class="form-control" id="date_of_birth" placeholder="AGE" disabled="" value="{{ $item->age }}" />
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <textarea class="form-control" rows="3" placeholder="Address" id="address" disabled=""></textarea>
+                                                <textarea class="form-control" rows="3" placeholder="Address" id="address" disabled="" value="{{ $item->guardian_name }}"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6">
@@ -161,21 +161,21 @@
                                                 <label for="sex" class="col-sm-4 col-md-2 col-form-label">Sex</label>
                                                 <div id="sex" class="col-sm-8 col-md-10">
                                                     <div class="radio radio-info radio-inline">
-                                                        <input type="radio" id="male" disabled="" />
+                                                        <input type="radio" id="male" disabled="" {{ ($item->sex=="male")? "checked" : "" }}/>
                                                         <label for="male">Male</label>
                                                     </div>
                                                     <div class="radio radio-inline">
-                                                        <input type="radio" id="female" disabled="" />
+                                                        <input type="radio" id="female" disabled="" {{ ($item->sex=="female")? "checked" : "" }} />
                                                         <label for="female">Female</label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6">
+                                        {{-- <div class="col-xs-12 col-sm-12 col-md-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" id="doctor_name" placeholder="Doctor Name" disabled="" />
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -244,7 +244,7 @@
                             </div>
 
                             <div id="parentx" class="table-responsive" style="overflow: auto;">
-                                <table id="fixTable" class="table table-bordered table-striped">
+                                {{-- <table id="fixTable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th width="100" style="background-color: rgb(235, 237, 242); position: relative; top: 0px;"><i class="fa fa-cogs"></i></th>
@@ -260,126 +260,34 @@
                                                 <div class="btn btn-group"><button type="button" class="addMore btn btn-sm btn-success">+</button><button type="button" class="remove btn btn-sm btn-danger">-</button></div>
                                             </td>
                                             <td>
-                                                <input name="service_name[]" class="form-control service_name service_data" type="text" placeholder="Service" required="" />
-                                                <input name="service_id[]" type="hidden" class="service_id" required="" />
+                                                <input name="service_name[]" class="form-control service_name service_data" type="text" placeholder="Service" />
+                                                <input name="service_id[]" type="hidden" class="service_id" />
                                             </td>
-                                            <td><input name="quantity[]" class="form-control quantity item-calc" type="text" placeholder="Quantity" value="1" required="" /></td>
-                                            <td><input name="amount[]" class="form-control amount item-calc" type="text" placeholder="Amount" value="0.00" required="" /></td>
-                                            <td><input name="subtotal[]" class="form-control subtotal" type="text" placeholder="Sub" total="" value="0.00" required="" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="btn btn-group"><button type="button" class="addMore btn btn-sm btn-success">+</button><button type="button" class="remove btn btn-sm btn-danger">-</button></div>
-                                            </td>
-                                            <td>
-                                                <input name="service_name[]" class="form-control service_name service_data" type="text" placeholder="Service" required="" />
-                                                <input name="service_id[]" type="hidden" class="service_id" required="" />
-                                            </td>
-                                            <td><input name="quantity[]" class="form-control quantity item-calc" type="text" placeholder="Quantity" value="1" required="" /></td>
-                                            <td><input name="amount[]" class="form-control amount item-calc" type="text" placeholder="Amount" value="0.00" required="" /></td>
-                                            <td><input name="subtotal[]" class="form-control subtotal" type="text" placeholder="Sub" total="" value="0.00" required="" /></td>
+                                            <td><input name="quantity[]" class="form-control quantity item-calc" type="text" placeholder="Quantity" value="1" /></td>
+                                            <td><input name="amount[]" class="form-control amount item-calc" type="text" placeholder="Amount" value="0.00" /></td>
+                                            <td><input name="subtotal[]" class="form-control subtotal" type="text" placeholder="Sub" total="" value="0.00" /></td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> --}}
+                                
+
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <form action="" method="post">
+                            <div class="input_fields_wrap">
+
+                            <button type="button" class="add_field_button">Add More Fields</button>
+                            <input type="text" class="form-control mb-3" name="mytext[]" placeholder="Enter Price">
                             </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                            </div> 
 
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <h3 class="block-title-2">Advance Payment</h3>
-                                    <div class="table-responsive table-height">
-                                        <table class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Receipt No</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="advance_data"></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-md-4 col-form-label">Payment Method</label>
-                                        <div class="col-sm-8 col-md-8">
-                                            <select name="payment_method" class="form-control basic-single select2-hidden-accessible" required="required" tabindex="-1" aria-hidden="true">
-                                                <option value="" selected="selected">Select Option</option>
-                                                <option value="Cash">Cash</option>
-                                                <option value="Card">Card</option>
-                                                <option value="Cheque">Cheque</option>
-                                            </select>
-                                            <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 195.766px;">
-                                                <span class="selection">
-                                                    <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-payment_method-nv-container">
-                                                        <span class="select2-selection__rendered" id="select2-payment_method-nv-container"><span class="select2-selection__placeholder">Select option</span></span>
-                                                        <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
-                                                    </span>
-                                                </span>
-                                                <span class="dropdown-wrapper" aria-hidden="true"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="card_cheque_no" class="col-sm-4 col-md-4 col-form-label">Card / Cheque No.</label>
-                                        <div class="col-sm-8 col-md-8">
-                                            <input name="card_cheque_no" class="form-control" type="text" id="card_cheque_no" placeholder="Card / Cheque No." />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="receipt_no" class="col-sm-4 col-md-4 col-form-label">Receipt No</label>
-                                        <div class="col-sm-8 col-md-8">
-                                            <input name="receipt_no" class="form-control" type="text" value="" id="receipt_no" placeholder="Receipt No" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <div class="table-responsive m-b-20">
-                                        <table class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Total</th>
-                                                    <th>Receipt</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Total</td>
-                                                    <td><input name="total" type="number" class="form-control grand-calc" id="total" value="0.00" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">Discount %</div>
-                                                            <input type="number" id="discountPercent" required="" autocomplete="off" class="form-control tax-discount-calc" value="0" />
-                                                        </div>
-                                                    </td>
-                                                    <td><input name="discount" type="number" class="form-control grand-calc" id="discount" value="0.00" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">Tax %</div>
-                                                            <input type="number" id="taxPercent" required="" autocomplete="off" class="form-control tax-discount-calc" value="0" />
-                                                        </div>
-                                                    </td>
-                                                    <td><input name="tax" type="number" class="form-control grand-calc" id="tax" value="0.00" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Pay Advance</td>
-                                                    <td><input type="number" class="form-control grand-calc" id="pay_advance" value="0.00" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Payable</td>
-                                                    <td><input type="number" class="form-control grand-calc" id="payable" value="0.00" /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <div class="form-group">
                                 <textarea name="note" class="form-control" rows="5" placeholder="Notes"></textarea>
@@ -408,8 +316,10 @@
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 <script>
+
     $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
     var wrapper   		= $(".input_fields_wrap"); //Fields wrapper

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Finance;
+use App\Models\InPatient;
 
 class FinanceController extends Controller
 {
@@ -16,8 +17,9 @@ class FinanceController extends Controller
     
     public function create()
     {
-        // $finance = Finance::all();
-        return view('admin.finance.add');
+        $patient_data = InPatient::all();
+        
+        return view('admin.finance.add', compact('patient_data'));
     }
 
    
@@ -87,5 +89,12 @@ class FinanceController extends Controller
         $finance->delete();
         session()->flash('finance-delete-message', 'Bill deleted successfully.....');
         return back();
+    }
+
+    public function get_data(Request $request, $patient_id)
+    {   
+        $patient_data = InPatient::where('admission_id', $patient_id)->get();
+
+        return view('admin.finance.add')->with('patient_data', $patient_data);
     }
 }
