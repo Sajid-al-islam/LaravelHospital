@@ -18,8 +18,12 @@ class FinanceController extends Controller
     public function create()
     {
         $patient_data = InPatient::all();
-        
-        return view('admin.finance.add', compact('patient_data'));
+        if($patient_data == NULL) {
+            return view('admin.finance.add_new');
+        }
+        else {
+            return view('admin.finance.add', compact('patient_data'));
+        }
     }
 
    
