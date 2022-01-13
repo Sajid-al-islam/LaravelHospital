@@ -25,6 +25,7 @@ class FinanceController extends Controller
    
     public function store(Request $request)
     {
+        dd($request->all());
         request()->validate([
             'name'=> 'required',
             'service_name'=> 'required',
@@ -33,7 +34,7 @@ class FinanceController extends Controller
             
         ]);
 
-        dd($request->all());
+        
         $finance = new Finance();
         $finance->name = request('name');
         $finance->service_name = request('service_name'); 

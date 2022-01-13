@@ -97,11 +97,11 @@
                         {{-- <div class="btn-group col-md-4 col-xs-12">
                             <a class="btn btn-primary" href="https://hospitalnew.bdtask.com/demo7/billing/bill"> <i class="fa fa-list"></i> Bill List </a>
                         </div> --}}
-                        <h2 class="col-md-8 col-xs-12 text-left text-success">Add Bill</h2>
+                        <h2 class="col-md-8 col-xs-12 text-left text-primary">Add Bill</h2>
                     </div>
 
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle mb-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select Patient
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <form action="{{ route('finance.add') }}" class="billig-form" method="post" accept-charset="utf-8">
+                        <form action="{{ route('finance.store') }}" class="billig-form" method="post" accept-charset="utf-8">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-9">
@@ -123,13 +123,7 @@
                                         <div class="col-xs-12 col-sm-12 col-md-6">
 
                                             <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="admission_id" value="{{ $item->admission_id }}" name="admission_id" placeholder="AID" />
-                                                        <span class="input-group-btn"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control" id="patient_id" value="{{ $item->admission_id }}" placeholder="Patient ID" disabled="" />
                                                     </div>
@@ -144,16 +138,12 @@
                                         <div class="col-xs-12 col-sm-12 col-md-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" id="patient_name" placeholder="Patient  Name" disabled="" value="{{ $item->name }}" />
+                                                <input type="hidden" name="patient_id" value="{{ $item->id }}" />
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" id="date_of_birth" placeholder="AGE" disabled="" value="{{ $item->age }}" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6">
-                                            <div class="form-group">
-                                                <textarea class="form-control" rows="3" placeholder="Address" id="address" disabled="" value="{{ $item->guardian_name }}"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6">
@@ -192,16 +182,7 @@
                                         <div class="form-group row">
                                             <label for="admission_date" class="col-sm-4 col-form-label">Admission Date</label>
                                             <div class="col-sm-8">
-                                                <input class="form-control" type="text" value="" placeholder="Admission Date" id="admission_date" disabled="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <div class="form-group row">
-                                            <label for="package_name" class="col-sm-4 col-form-label">Package Name</label>
-                                            <div class="col-sm-8">
-                                                <input class="form-control" id="package_name" type="text" value="" placeholder="Package Name" disabled="" />
-                                                <input name="package_id" type="hidden" id="package_id" />
+                                                <input class="form-control" type="text" value="{{ $item->created_at }}" placeholder="Admission Date" id="admission_date" disabled="" />
                                             </div>
                                         </div>
                                     </div>
@@ -212,7 +193,7 @@
                                                 &nbsp;
                                             </label>
                                             <div class="col-sm-8">
-                                                <input class="form-control" type="text" placeholder="Total Days" id="total_days" disabled="" />
+                                                <input class="form-control" name="total_day" type="text" placeholder="Total Days" id="total_days" />
                                             </div>
                                         </div>
                                     </div>
@@ -220,23 +201,7 @@
                                         <div class="form-group row">
                                             <label for="discharge_date" class="col-sm-4 col-form-label">Discharge Date</label>
                                             <div class="col-sm-8">
-                                                <input class="form-control" type="text" value="" placeholder="Discharge Date" id="discharge_date" disabled="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <div class="form-group row">
-                                            <label for="insurance_name" class="col-sm-4 col-form-label">Insurance Name</label>
-                                            <div class="col-sm-8">
-                                                <input class="form-control" type="text" value="" placeholder="Insurance Name" id="insurance_name" disabled="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <div class="form-group row">
-                                            <label for="policy_no" class="col-sm-4 col-form-label">Policy No.</label>
-                                            <div class="col-sm-8">
-                                                <input class="form-control" type="text" value="" placeholder="Policy No." id="policy_no" disabled="" />
+                                                <input class="form-control" type="date" value="" placeholder="Discharge Date" id="discharge_date" />
                                             </div>
                                         </div>
                                     </div>
@@ -244,64 +209,70 @@
                             </div>
 
                             <div id="parentx" class="table-responsive" style="overflow: auto;">
-                                {{-- <table id="fixTable" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th width="100" style="background-color: rgb(235, 237, 242); position: relative; top: 0px;"><i class="fa fa-cogs"></i></th>
-                                            <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Service Name</th>
-                                            <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Quantity</th>
-                                            <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Rate</th>
-                                            <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Sub Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="services">
-                                        <tr>
-                                            <td>
-                                                <div class="btn btn-group"><button type="button" class="addMore btn btn-sm btn-success">+</button><button type="button" class="remove btn btn-sm btn-danger">-</button></div>
-                                            </td>
-                                            <td>
-                                                <input name="service_name[]" class="form-control service_name service_data" type="text" placeholder="Service" />
-                                                <input name="service_id[]" type="hidden" class="service_id" />
-                                            </td>
-                                            <td><input name="quantity[]" class="form-control quantity item-calc" type="text" placeholder="Quantity" value="1" /></td>
-                                            <td><input name="amount[]" class="form-control amount item-calc" type="text" placeholder="Amount" value="0.00" /></td>
-                                            <td><input name="subtotal[]" class="form-control subtotal" type="text" placeholder="Sub" total="" value="0.00" /></td>
-                                        </tr>
-                                    </tbody>
-                                </table> --}}
-                                
+                                <table id="fixTable" class="table table-bordered table-striped">      
+                                <thead>
+                                    <tr>
+                                        <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Service Name</th>
+                                        <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Quantity</th>
+                                        <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Rate</th>
+                                        <th width="100" style="background-color: rgb(235, 237, 242); position: relative; top: 0px;"><i class="fa fa-cogs"></i></th>
+                                    </tr>
+                                </thead>
+                                </table>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input_fields_wrap">
+                                                <div class="input-group mb-3">
+                                                    <label class="sr-only" for="inlineFormInputName2">Service Name</label>
+                                                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="service_name[]" id="input1" onchange="calculateAmount(this.value)" placeholder="Enter Service Name">
+                                                    
+                                                    <label class="sr-only" for="inlineFormInputName2">Quantity</label>
+                                                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="service_cost[]" id="input2" onchange="calculateAmount(this.value)" placeholder="Enter Quantity">
 
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <form action="" method="post">
-                            <div class="input_fields_wrap">
-
-                            <button type="button" class="add_field_button">Add More Fields</button>
-                            <input type="text" class="form-control mb-3" name="mytext[]" placeholder="Enter Price">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
+                                                    <input placeholder="Enter Price" type="text" name="total_bill[]" class="form-control">
+                                                    
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="add_field_button btn btn-sm btn-success mb-2">Add</button>
+                                                    </div>
+                                                </div>
+                                            {{-- <button type="button" class="">Add More Fields</button>
+                                            <input type="text" class="form-control mb-3" name="mytext[]" placeholder="Enter Price"> --}}
+                                        </div>
+                                    </div>
+                                </div>
                             </div> 
 
+                            <div class="col-sm-4">
+                                <div class="table-responsive m-b-20">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Total</th>
+                                                <th>Receipt</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Total</td>
+                                                <td><input name="total_bill" type="text" class="form-control grand-calc" id="total_bill" value=""></td>
+                                            </tr>
+                                    </table>
+                                </div>
+                            </div>
                             
-
                             <div class="form-group">
                                 <textarea name="note" class="form-control" rows="5" placeholder="Notes"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <div class="form-check">
-                                    <label class="radio-inline"><input type="radio" name="status" value="0" checked="" />Unpaid</label>
-                                    <label class="radio-inline"><input type="radio" name="status" value="1" />Paid</label>
+                                    <label class="radio-inline"><input type="radio" name="payment_status" value="0" checked="" />Unpaid</label>
+                                    <label class="radio-inline"><input type="radio" name="payment_status" value="1" />Paid</label>
                                 </div>
                             </div>
 
                             <div class="panel-footer text-center">
-                                <button type="submit" class="btn btn-success w-md">Save</button>
+                                <button type="submit" class="btn btn-primary w-md">Save</button>
                             </div>
                         </form>
                     </div>
@@ -330,7 +301,8 @@
     e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="input-group mb-3"><input placeholder="Enter Price" type="text" name="mytext[]" class="form-control"><div class="input-group-append"><button class="btn btn-outline-danger remove_field" type="button">Remove</button></div></div>'); //add input box
+            // $(wrapper).append('<div class="input-group mb-3"><input placeholder="Enter Price" type="text" name="mytext[]" class="form-control"><div class="input-group-append"><button class="btn btn-outline-danger remove_field" type="button">Remove</button></div></div>'); //add input box
+            $(wrapper).append('<div class="input-group mb-3"><label class="sr-only" for="inlineFormInputName2">Service Name</label><input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Enter Service Name"><label class="sr-only" for="inlineFormInputName2">Quantity</label><input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Enter Quantity"><input placeholder="Enter Price" type="text" name="mytext[]" class="form-control"><div class="input-group-append"><button class="btn btn-sm btn-danger remove_field" type="button">Remove</button></div></div>'); //add input box
         }
     });
 
@@ -350,4 +322,8 @@
 </script>
 @endsection
 
+{{-- <div class="input-group mb-3"><label class="sr-only" for="inlineFormInputName2">Service Name</label><input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Enter Service Name"><label class="sr-only" for="inlineFormInputName2">Quantity</label><input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Enter Quantity"><input placeholder="Enter Price" type="text" name="mytext[]" class="form-control"><div class="input-group-append"><button class="btn btn-sm btn-danger remove_field" type="button">Remove</button></div></div> --}}
+
 </x-admin.admin-master>
+
+

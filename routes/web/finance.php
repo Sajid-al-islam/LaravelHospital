@@ -11,7 +11,7 @@ Route::middleware(['auth', 'role:super-admin'])->group(function() {
 	Route::patch('/update/bill/{bill}', [FinanceController::class, 'update'])->name('finance.update');
 	Route::delete('/delete/bill/{bill}', [FinanceController::class, 'delete'])->name('finance.delete');
 
-	Route::get('/get-patient-data/{patient_id}', [FinanceController::class, 'get_data'])->name('finance.get_data');
+	// Route::get('/get-patient-data/{patient_id}', [FinanceController::class, 'get_data'])->name('finance.get_data');
 	//PDF//
 	Route::get('/admin/bill/download', 'FinanceController@download_view')->name('bill.download');
 
