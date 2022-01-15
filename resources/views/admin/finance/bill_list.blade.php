@@ -130,7 +130,7 @@
 							<td>{{ $finance->total_day }}</td>
 							<td>{{ $finance->total_bill }}</td>
 							<td>{{ $finance->created_at->diffForHumans() }}</td>
-							<td>{{ $finance->updated_at->diffForHumans() }}</td>
+							<td>{{ $finance->updated_at }}</td>
 							<td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-{{$finance->id}}">Edit</button>
 

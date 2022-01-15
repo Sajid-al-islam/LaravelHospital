@@ -201,6 +201,7 @@
                                         <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Service Name</th>
                                         <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Quantity</th>
                                         <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Rate</th>
+                                        <th style="background-color: rgb(235, 237, 242); position: relative; top: 0px;">Sub Total</th>
                                         <th width="100" style="background-color: rgb(235, 237, 242); position: relative; top: 0px;"><i class="fa fa-cogs"></i></th>
                                     </tr>
                                 </thead>
@@ -210,12 +211,17 @@
                                         <div class="input_fields_wrap">
                                                 <div class="input-group mb-3">
                                                     <label class="sr-only" for="inlineFormInputName2">Service Name</label>
-                                                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="service_name[]" id="input1" onchange="calculateAmount(this.value)" placeholder="Enter Service Name">
+                                                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="service_name[]" placeholder="Enter Service Name">
                                                     
                                                     <label class="sr-only" for="inlineFormInputName2">Quantity</label>
-                                                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="service_cost[]" id="input2" onchange="calculateAmount(this.value)" placeholder="Enter Quantity">
+                                                    <input type="text" class="form-control mb-2 mr-sm-2" name="service_quantity[]" id="input1" onchange="calculateAmount(this.value)" placeholder="Enter Quantity">
 
-                                                    <input placeholder="Enter Price" type="text" name="total_bill[]" class="form-control">
+                                                    <label class="sr-only" for="inlineFormInputName2">Cost</label>
+                                                    <input type="text" class="form-control mb-2 mr-sm-2" name="service_cost[]" id="input2" onchange="calculateAmount(this.value)" placeholder="Enter cost">
+
+                                                    <label class="sr-only" for="inlineFormInputName2">Total Bill</label>
+                                                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" id="total_bill" name="service_cost[]" placeholder="Total">
+                                                    {{-- <input placeholder="Total Price" type="text" name="total_bill[]" class="form-control"> --}}
                                                     
                                                     <div class="input-group-append">
                                                         <button type="button" class="add_field_button btn btn-sm btn-success mb-2">Add</button>
@@ -288,7 +294,7 @@
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
             // $(wrapper).append('<div class="input-group mb-3"><input placeholder="Enter Price" type="text" name="mytext[]" class="form-control"><div class="input-group-append"><button class="btn btn-outline-danger remove_field" type="button">Remove</button></div></div>'); //add input box
-            $(wrapper).append('<div class="input-group mb-3"><label class="sr-only" for="inlineFormInputName2">Service Name</label><input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Enter Service Name"><label class="sr-only" for="inlineFormInputName2">Quantity</label><input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Enter Quantity"><input placeholder="Enter Price" type="text" name="mytext[]" class="form-control"><div class="input-group-append"><button class="btn btn-sm btn-danger remove_field" type="button">Remove</button></div></div>'); //add input box
+            $(wrapper).append('<div class="input-group mb-3"><label class="sr-only" for="inlineFormInputName2">Service Name</label><input type="text" class="form-control mb-2 mr-sm-2" name="service_name[]" id="inlineFormInputName2" placeholder="Enter Service Name"><label class="sr-only" for="inlineFormInputName2">Quantity</label><input type="text" class="form-control mb-2 mr-sm-2" name="service_quantity[]" id="inlineFormInputName2" placeholder="Enter Quantity"><label class="sr-only" for="inlineFormInputName2">service cost</label><input type="text" class="form-control mb-2 mr-sm-2" name="service_cost[]" id="inlineFormInputName2" placeholder="Enter Quantity"><input placeholder="Enter Price" type="text" name="total_bill[]" class="form-control"><div class="input-group-append"><button class="btn btn-sm btn-danger remove_field" type="button">Remove</button></div></div>'); //add input box
         }
     });
 
@@ -309,7 +315,7 @@
 @endsection
 
 {{-- <div class="input-group mb-3"><label class="sr-only" for="inlineFormInputName2">Service Name</label><input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Enter Service Name"><label class="sr-only" for="inlineFormInputName2">Quantity</label><input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Enter Quantity"><input placeholder="Enter Price" type="text" name="mytext[]" class="form-control"><div class="input-group-append"><button class="btn btn-sm btn-danger remove_field" type="button">Remove</button></div></div> --}}
-
+{{-- <div class="input-group mb-3"><label class="sr-only" for="inlineFormInputName2">Service Name</label><input type="text" class="form-control mb-2 mr-sm-2" name="service_name[]" id="inlineFormInputName2" placeholder="Enter Service Name"><label class="sr-only" for="inlineFormInputName2">Quantity</label><input type="text" class="form-control mb-2 mr-sm-2" name="service_quantity[]" id="inlineFormInputName2" placeholder="Enter Quantity"><label class="sr-only" for="inlineFormInputName2">service cost</label><input type="text" class="form-control mb-2 mr-sm-2" name="service_cost[]" id="inlineFormInputName2" placeholder="Enter Quantity"><input placeholder="Enter Price" type="text" name="total_bill[]" class="form-control"><div class="input-group-append"><button class="btn btn-sm btn-danger remove_field" type="button">Remove</button></div></div> --}}
 </x-admin.admin-master>
 
 
