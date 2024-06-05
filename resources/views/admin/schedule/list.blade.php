@@ -128,6 +128,7 @@
 										@method('DELETE')
 										<button type="submit" cursor="pointer" class="btn btn-danger">Delete</button>
 									</form>
+						
 								</td>
 							</tr>
 						@endforeach

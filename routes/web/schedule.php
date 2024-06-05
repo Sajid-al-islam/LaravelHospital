@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function() {
+Route::middleware(['role:stuff'])->group(function() {
 
 	Route::get('/schedule/add', 'ScheduleController@add')->name('schedule.add');
 	Route::post('/schedule/store', 'ScheduleController@store')->name('schedule.store');

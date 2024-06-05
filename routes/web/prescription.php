@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrescriptionController;
 
-Route::middleware('auth')->group(function() {
+Route::middleware(['role:doctor','role:patient'])->group(function() {
 
 	Route::get('doctor/prescription', [PrescriptionController::class, 'prescription'])->name('doctor.prescription');
 	Route::post('/prescription/store', [PrescriptionController::class, 'store'])->name('prescription.store');

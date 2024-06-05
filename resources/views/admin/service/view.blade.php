@@ -120,11 +120,12 @@
 									</div>
 								</td>
 								<td>
-									<form action="{{ route('service.destroy', $service->id) }}" method="post">
+									<!-- <form action="{{ route('service.destroy', $service->id) }}" method="post">
 										@csrf
 										@method('DELETE')
 										<button type="submit" cursor="pointer" class="btn btn-sm btn-danger">Delete</button>
-									</form>
+									</form> -->
+									<a href="{{ route('service.destroy', $service->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
 								</td>
 							</tr>
 						@endforeach

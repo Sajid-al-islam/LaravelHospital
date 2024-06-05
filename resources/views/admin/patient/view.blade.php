@@ -57,11 +57,13 @@
 								<td>{{ $patient->created_at->diffForHumans() }}</td>
 								<td>{{ $patient->updated_at->diffForHumans() }}</td>
 								<td>
-									<form action="{{ route('patient.delete', $patient->id) }}" method="post">
+									<!-- <form action="{{ route('patient.delete', $patient->id) }}" method="post">
 										@csrf
 										@method('DELETE')
 										<button type="submit" cursor="pointer" class="btn btn-danger">Delete</button>
-									</form>
+									</form> -->
+									<a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{ route('patient.delete', $patient->id) }}">Delete</a>
+
 								</td>
 							</tr>
 						@endforeach

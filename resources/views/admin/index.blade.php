@@ -50,7 +50,7 @@
 		</div>
 		@endif
 		<!-- ./col -->
-		@if(auth()->user()->userHasRole('doctor'))
+		@if(auth()->user()->userHasRole('stuff'))
 		<div class="col-lg-3 col-6">
 			<!-- small box -->
 			<div class="small-box bg-info">
