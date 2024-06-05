@@ -117,11 +117,13 @@
 								</div>
 							</td>
 							<td>
-								<form action="{{ route('department.delete', $department->id) }}" method="post">
+								<!-- <form action="{{ route('department.delete', $department->id) }}" method="post">
 									@csrf
 									@method('DELETE')
 									<button type="submit" cursor="pointer" class="btn btn-sm btn-danger">Delete</button>
-								</form>
+								</form> -->
+								<a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{ route('department.delete', $department->id) }}">Delete</a>
+
 							</td>
 						</tr>
 						@endforeach

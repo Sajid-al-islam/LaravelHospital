@@ -1,8 +1,5 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
-
 
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\UIController;
@@ -28,11 +25,11 @@ use App\Http\Controllers\StripeController;
 
 Route::middleware('auth')->group(function() {
 
-Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('dashboard', [AdminController::class, 'index'])->name('admin.index');
 
 /****    APPOINTMENT SECTION   ****/
 Route::resource('appointment', 'AppointmentController');
-Route::get('admin/appointment/list', [AdminController::class, 'list'])->name('admin.list');
+Route::get('/appointment/list', [AdminController::class, 'list'])->name('admin.list');
 
 
 

@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['role:admin'])->group(function() {
 	//Floor
 	Route::get('admin/floor', 'FloorController@floor')->name('admin.floor');
 	Route::post('admin/floor', 'FloorController@store')->name('admin.floor.store');

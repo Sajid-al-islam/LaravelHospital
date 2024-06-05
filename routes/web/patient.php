@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PatientController;
 
-Route::middleware('auth')->group(function() {
+Route::middleware(['role:admin','role:doctor'])->group(function() {
 
 	/****    PATIENT SECTION   ****/
 	Route::get('/patient/register', [PatientController::class, 'add'])->name('patient.register');

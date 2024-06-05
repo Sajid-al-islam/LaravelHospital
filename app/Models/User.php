@@ -24,7 +24,6 @@ class User extends Authenticatable
         'password',
         'phone',
         'photo',
-        'role_id',
         'status'
     ];
 
@@ -59,7 +58,7 @@ class User extends Authenticatable
     public function userHasRole($role_name) {
         foreach($this->roles as $role) {
             if ($role_name == $role->slug) {
-                return true;
+                return $role->slug;
             }
         }
         return false;
