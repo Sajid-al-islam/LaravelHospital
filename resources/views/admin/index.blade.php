@@ -2,6 +2,7 @@
 	
 @section('content')
 	<div class="row pt-4">
+	@if(auth()->user()->userHasRole('super-admin'))
 		<div class="col-lg-3 col-6">
 			<!-- small box -->
 			<div class="small-box bg-info">
@@ -15,7 +16,9 @@
 				<a href="{{ route('department.view') }}" class="small-box-footer">Department <i class="fas fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
+		@endif
 		<!-- ./col -->
+		@if(auth()->user()->userHasRole('super-admin')|| auth()->user()->userHasRole('admin'))
 		<div class="col-lg-3 col-6">
 			<!-- small box -->
 			<div class="small-box bg-info">
@@ -29,7 +32,9 @@
 				<a href="{{ route('doctor.view') }}" class="small-box-footer">Doctors <i class="fas fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
+		@endif
 		<!-- ./col -->
+		@if(auth()->user()->userHasRole('super-admin'))
 		<div class="col-lg-3 col-6">
 			<!-- small box -->
 			<div class="small-box bg-info">
@@ -43,7 +48,9 @@
 				<a href="{{ route('service.index') }}" class="small-box-footer">Services <i class="fas fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
+		@endif
 		<!-- ./col -->
+		@if(auth()->user()->userHasRole('doctor'))
 		<div class="col-lg-3 col-6">
 			<!-- small box -->
 			<div class="small-box bg-info">
@@ -57,6 +64,7 @@
 				<a href="{{ route('admin.list') }}" class="small-box-footer">Appointment <i class="fas fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
+	
 		<div class="col-lg-3 col-6">
 			<!-- small box -->
 			<div class="small-box bg-danger">
@@ -70,6 +78,7 @@
 				<a href="{{ route('patient.add') }}" class="small-box-footer">Patients <i class="fas fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
+		@endif
 		<!-- ./col -->
 		<div class="col-lg-3 col-6">
 			<!-- small box -->
